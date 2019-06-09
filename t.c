@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
 
 	/* create new argv */
 
-	char** nargv = reallocarray(NULL, argc + 2, sizeof(char*));
+	char** nargv = reallocarray(NULL, argc + 3, sizeof(char*));
 	if (nargv == NULL) err(1, "reallocarray");
 
 	int i;
@@ -68,9 +68,9 @@ int main(int argc, char* argv[]) {
 	nargv[i] = NULL;
 
 	if (argc > 1) {
+		nargv[i++] = "-e";
 		for (int j = 1; j <= argc; j++) {
-			nargv[i] = argv[j];
-			i++;
+			nargv[i++] = argv[j];
 		}
 	}
 
