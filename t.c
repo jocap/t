@@ -9,6 +9,7 @@
 #include <unistd.h>
 
 int main(int argc, char* argv[]) {
+	char** nargv;
 	int exists, r;
 
 	/* get title of current window */
@@ -30,6 +31,11 @@ int main(int argc, char* argv[]) {
 
 	r = pclose(p);
 	if (r == -1) err(1, "pclose");
+
+	if (title[0] != '/') {
+		exists = 0;
+		goto create_argv;
+	}
 
 	/* check if title matches directory (or file) */
 
@@ -56,7 +62,9 @@ check:
 
 	/* create new argv */
 
-	char** nargv = reallocarray(NULL, argc + 3, sizeof(char*));
+create_argv:
+
+	nargv = reallocarray(NULL, argc + 3, sizeof(char*));
 	if (nargv == NULL) err(1, "reallocarray");
 
 	int i;
