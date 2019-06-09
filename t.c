@@ -34,6 +34,9 @@ int main(int argc, char* argv[]) {
 	/* check if title matches directory (or file) */
 
 	struct stat s;
+
+check:
+
 	r = stat(title, &s);
 	if (r == -1) {
 		if (errno == ENOENT) exists = 0;
@@ -48,6 +51,7 @@ int main(int argc, char* argv[]) {
 		char* newtitle = dirname(title);
 		if (newtitle == NULL) err(1, "dirname");
 		title = newtitle;
+		goto check;
 	}
 
 	/* create new argv */
