@@ -1,0 +1,52 @@
+.Dd $Mdocdate$
+.Dt T 1
+.Os
+.Sh NAME
+.Nm t
+.Nd open another terminal in same directory
+.
+.Sh SYNOPSIS
+.Nm td
+.Op Ar command ...
+.
+.Sh DESCRIPTION
+.Nm t
+opens another terminal in the same directory as the currently focused
+terminal window.
+
+It relies on the
+.Nm xtitle
+tool to fetch the title of the current terminal window.
+This string should consist of the current path.
+In my
+.Li .kshrc ,
+I achieve this using the following code:
+.
+.Bd -literal -offset 6n
+PS1=$PS1'\\[\\e]2;$PWD\\a\\]' # set title to pwd on every prompt
+.Ed
+
+If
+.Nm t
+detects that the title string is an existant directory, it opens a
+terminal in that directory.
+If it is a file, it opens the terminal in the dirname of that file.
+
+If the path does not exist, the terminal is opened in the user's home
+directory.
+.
+.Sh PARAMETERS
+.Bl -tag -offset 6n
+.It Op Ar command ...
+a command for the launched terminal to run
+.El
+.
+.Sh CUSTOMIZATION
+By default,
+.Nm t
+runs
+.Xr urxvtc 1 .
+To change this, edit the C source.
+.
+.Sh AUTHOR
+.An John Ankarström Aq Mt john@ankarstrom.se
