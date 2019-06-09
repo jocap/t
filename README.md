@@ -6,7 +6,7 @@ T(1) - General Commands Manual
 
 ### SYNOPSIS
 
-**td**
+**t**
 \[*command&nbsp;...*]
 
 ### DESCRIPTION
