@@ -8,16 +8,16 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-int main(int argc, char* argv[]) {
-	char** nargv;
+int main(int argc, char *argv[]) {
+	char **nargv;
 	int exists, r;
 
 	/* get title of current window */
 
-	char* title = reallocarray(NULL, PATH_MAX, sizeof(char));
+	char *title = reallocarray(NULL, PATH_MAX, sizeof(char));
 	if (title == NULL) err(1, "reallocarray");
 
-	FILE* p = popen("xtitle", "r");
+	FILE *p = popen("xtitle", "r");
 	if (p == NULL) err(1, "popen");
 
 	int c;
@@ -54,7 +54,7 @@ check:
 	/* if file, get dirname instead */
 
 	if (!S_ISDIR(s.st_mode)) {
-		char* newtitle = dirname(title);
+		char *newtitle = dirname(title);
 		if (newtitle == NULL) err(1, "dirname");
 		title = newtitle;
 		goto check;
@@ -64,7 +64,7 @@ check:
 
 create_argv:
 
-	nargv = reallocarray(NULL, argc + 3, sizeof(char*));
+	nargv = reallocarray(NULL, argc + 3, sizeof(char *));
 	if (nargv == NULL) err(1, "reallocarray");
 
 	int i;
